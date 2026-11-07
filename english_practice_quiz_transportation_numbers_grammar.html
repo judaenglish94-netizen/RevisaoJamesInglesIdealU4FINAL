@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🚗 English Quiz Kids - Transportation, Numbers & Grammar</title>
+  <style>
+    :root {
+      --primary: #4A90E2;
+      --primary-dark: #357ABD;
+      --secondary: #FF9F43;
+      --success: #2ECC71;
+      --danger: #EE5253;
+      --neutral-dark: #2C3E50;
+      --neutral-light: #F8F9FA;
+      --card-bg: #FFFFFF;
+      --radius: 16px;
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #E0F2FE 0%, #EFF6FF 100%);
+      color: var(--neutral-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px;
+    }
+
+    /* Header & Navigation bar */
+    header {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .logo-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-nav-toggle {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+
+    .btn-nav-toggle:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Container main layout */
+    .app-container {
+      width: 100%;
+      max-width: 900px;
+      position: relative;
+    }
+
+    /* Study / Start Screen */
+    .study-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+
+    .study-title {
+      font-size: 1.6rem;
+      color: var(--primary);
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .grammar-box {
+      background: #F0F7FF;
+      border-left: 5px solid var(--primary);
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+    }
+
+    .grammar-box h3 {
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+
+    .grammar-box p {
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .grammar-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .grammar-table th, .grammar-table td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #E2E8F0;
+      font-size: 0.95rem;
+    }
+
+    .grammar-table th {
+      background: #E2E8F0;
+      color: var(--neutral-dark);
+    }
+
+    .start-btn {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: var(--success);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: bold;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      text-align: center;
+      transition: transform 0.2s, background 0.2s;
+      box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+      margin-top: 20px;
+    }
+
+    .start-btn:hover {
+      transform: translateY(-2px);
+      background: #27AE60;
+    }
+
+    /* Quick Question Navigation Grid */
+    .question-grid-container {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+    }
+
+    .grid-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #64748B;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .question-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+      gap: 6px;
+    }
+
+    .q-btn {
+      height: 36px;
+      border: 2px solid #E2E8F0;
+      border-radius: 8px;
+      background: white;
+      font-weight: bold;
+      color: var(--neutral-dark);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .q-btn:hover {
+      border-color: var(--primary);
+    }
+
+    .q-btn.active {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+
+    .q-btn.correct {
+      background: var(--success);
+      color: white;
+      border-color: var(--success);
+    }
+
+    .q-btn.incorrect {
+      background: var(--danger);
+      color: white;
+      border-color: var(--danger);
+    }
+
+    /* Question Main Card */
+    .question-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .block-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      background: #E0F2FE;
+      color: var(--primary-dark);
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .question-text {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--neutral-dark);
+      line-height: 1.4;
+    }
+
+    /* Definition Box (Block 1) & Reading Passage Box (Block 2) */
+    .definition-box {
+      background: #FFFBEB;
+      border: 2px solid #FCD34D;
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      font-size: 1.05rem;
+      color: #78350F;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    .reading-passage-box {
+      background: #F0F9FF;
+      border-left: 5px solid var(--primary);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 20px;
+      font-size: 1.02rem;
+      line-height: 1.6;
+      color: var(--neutral-dark);
+    }
+
+    .reading-passage-title {
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    /* Options & Input Styling */
+    .options-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .btn-option {
+      padding: 14px 18px;
+      border: 2px solid #E2E8F0;
+      border-radius: 12px;
+      background: white;
+      text-align: left;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .btn-option:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: #F8FAFC;
+    }
+
+    .btn-option.selected {
+      border-color: var(--primary);
+      background: #EFF6FF;
+    }
+
+    .btn-option.correct-opt {
+      background: #DEF7EC;
+      border-color: var(--success);
+      color: #03543F;
+    }
+
+    .btn-option.wrong-opt {
+      background: #FDE8E8;
+      border-color: var(--danger);
+      color: #9B1C1C;
+    }
+
+    /* Image Display for Vehicles & Numbers */
+    .visual-container {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .vehicle-svg {
+      width: 180px;
+      height: 130px;
+      object-fit: contain;
+    }
+
+    .number-svg {
+      width: 160px;
+      height: 120px;
+      object-fit: contain;
+    }
+
+    /* Text Input block */
+    .text-input-container {
+      margin-bottom: 20px;
+    }
+
+    .text-input {
+      width: 100%;
+      padding: 14px;
+      border: 2px solid #CBD5E1;
+      border-radius: 12px;
+      font-size: 1.15rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .text-input:focus {
+      border-color: var(--primary);
+    }
+
+    .input-hint {
+      font-size: 0.85rem;
+      color: #64748B;
+      margin-top: 6px;
+    }
+
+    /* Feedback Box */
+    .feedback-box {
+      padding: 14px 18px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      display: none;
+    }
+
+    .feedback-box.correct {
+      display: block;
+      background: #DEF7EC;
+      color: #03543F;
+      border: 1px solid #84E1BC;
+    }
+
+    .feedback-box.incorrect {
+      display: block;
+      background: #FDE8E8;
+      color: #9B1C1C;
+      border: 1px solid #F8B4B4;
+    }
+
+    .feedback-box.warning {
+      display: block;
+      background: #FEF3C7;
+      color: #92400E;
+      border: 1px solid #FCD34D;
+    }
+
+    /* Navigation Controls */
+    .action-controls {
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-control {
+      padding: 12px 20px;
+      border-radius: 10px;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-prev {
+      background: #E2E8F0;
+      color: var(--neutral-dark);
+    }
+
+    .btn-next {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-check {
+      background: var(--secondary);
+      color: white;
+    }
+
+    .btn-try-again {
+      background: #F59E0B;
+      color: white;
+      display: none;
+    }
+
+    /* Sidebar Drawer Navigation */
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 100;
+      display: none;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -320px;
+      width: 300px;
+      height: 100%;
+      background: white;
+      z-index: 101;
+      transition: left 0.3s ease;
+      padding: 20px;
+      overflow-y: auto;
+      box-shadow: 4px 0 16px rgba(0,0,0,0.1);
+    }
+
+    .sidebar.open {
+      left: 0;
+    }
+
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #E2E8F0;
+      padding-bottom: 10px;
+    }
+
+    .block-section-title {
+      font-size: 0.9rem;
+      font-weight: bold;
+      color: #64748B;
+      margin: 16px 0 8px 0;
+    }
+
+    .sidebar-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .sidebar-item {
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: #F8FAFC;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .sidebar-item:hover {
+      background: #E0F2FE;
+    }
+
+    /* Report Card Screen */
+    .report-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .report-grade {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 14px 0 4px 0;
+    }
+
+    .report-percentage {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #64748B;
+      margin-bottom: 16px;
+    }
+
+    .report-stats {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px 0;
+      background: #F8FAFC;
+      padding: 16px;
+      border-radius: 12px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .stat-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stat-val {
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+
+    .recommendations {
+      text-align: left;
+      background: #FFFBEB;
+      border: 1px solid #FCD34D;
+      padding: 16px;
+      border-radius: 12px;
+      margin-top: 20px;
+    }
+
+    .recommendations h4 {
+      color: #B45309;
+      margin-bottom: 8px;
+    }
+
+    .recommendations li {
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-title">
+      🚗 English Quiz Kids - Transportation, Numbers & Grammar
+    </div>
+    <div style="display: flex; gap: 8px;">
+      <button class="btn-nav-toggle" id="study-rules-btn" onclick="showStudyScreen()">📚 Regras</button>
+      <button class="btn-nav-toggle" onclick="toggleSidebar()">☰ Menu</button>
+    </div>
+  </header>
+
+  <!-- Sidebar overlay and menu -->
+  <div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h3>Navegação do Quiz</h3>
+      <button onclick="toggleSidebar()" style="background:none; border:none; font-size:1.5rem; cursor:pointer;">✕</button>
+    </div>
+    <div id="sidebar-content"></div>
+  </div>
+
+  <div class="app-container">
+
+    <!-- STUDY SCREEN -->
+    <div id="study-screen" class="study-card">
+      <h2 class="study-title">Guia de Estudos de Inglês 📖</h2>
+      
+      <div class="grammar-box">
+        <h3>1. Meios de Transporte (Means of Transportation)</h3>
+        <p>Revise os principais meios de transporte em inglês:</p>
+        <table class="grammar-table">
+          <tr><th>Inglês</th><th>Português</th></tr>
+          <tr><td><b>airplane</b></td><td>avião</td></tr>
+          <tr><td><b>bus</b> / <b>school bus</b></td><td>ônibus / ônibus escolar</td></tr>
+          <tr><td><b>helicopter</b></td><td>helicóptero</td></tr>
+          <tr><td><b>car</b></td><td>carro</td></tr>
+          <tr><td><b>train</b></td><td>trem</td></tr>
+          <tr><td><b>motorcycle</b></td><td>moto / motocicleta</td></tr>
+          <tr><td><b>bike</b></td><td>bicicleta</td></tr>
+          <tr><td><b>on foot</b></td><td>a pé (caminhando)</td></tr>
+        </table>
+      </div>
+
+      <div class="grammar-box">
+        <h3>2. Números de 10 em 10 (Numbers 10 to 100)</h3>
+        <p>Atenção à escrita correta das dezenas em inglês:</p>
+        <table class="grammar-table">
+          <tr><td><b>10</b> = ten</td><td><b>60</b> = sixty</td></tr>
+          <tr><td><b>20</b> = twenty</td><td><b>70</b> = seventy</td></tr>
+          <tr><td><b>30</b> = thirty</td><td><b>80</b> = eighty</td></tr>
+          <tr><td><b>40</b> = forty</td><td><b>90</b> = ninety</td></tr>
+          <tr><td><b>50</b> = fifty</td><td><b>100</b> = one hundred</td></tr>
+        </table>
+      </div>
+
+      <div class="grammar-box">
+        <h3>3. Uso de DO / DOES / DON'T / DOESN'T</h3>
+        <p>Usamos o auxiliar de acordo com o sujeito da frase (pronomes ou nomes):</p>
+        <table class="grammar-table">
+          <tr><th>Auxiliar</th><th>Sujeitos</th></tr>
+          <tr>
+            <td><b style="color:var(--primary)">DO / DON'T</b></td>
+            <td>I, You, We, They<br><i>(Ex: your friends, the boys, Sarah and Tom)</i></td>
+          </tr>
+          <tr>
+            <td><b style="color:var(--secondary)">DOES / DOESN'T</b></td>
+            <td>He, She, It<br><i>(Ex: my father, Sarah, the dog, your brother)</i></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="grammar-box">
+        <h3>4. Verbos na 3ª Pessoa do Singular (He / She / It)</h3>
+        <p>Em frases afirmativas no presente, o verbo muda quando o sujeito é <b>he, she, it</b> (ou um nome no singular):</p>
+        <table class="grammar-table">
+          <tr><th>Regra</th><th>Exemplos</th></tr>
+          <tr><td><b>Regra geral (+s)</b></td><td>play → <b>plays</b> | like → <b>likes</b></td></tr>
+          <tr><td><b>Terminados em -o, -ch, -sh, -x (+es)</b></td><td>go → <b>goes</b> | watch → <b>watches</b> | wash → <b>washes</b> | fix → <b>fixes</b></td></tr>
+          <tr><td><b>Consoante + y (tira o y e +ies)</b></td><td>study → <b>studies</b> | fly → <b>flies</b> | cry → <b>cries</b></td></tr>
+        </table>
+      </div>
+
+      <button class="start-btn" onclick="startQuiz()">Começar o Quiz! 🚀</button>
+    </div>
+
+    <!-- QUIZ INTERACTIVE SCREEN -->
+    <div id="quiz-screen" class="hidden">
+      
+      <!-- Rapid access question grid (1 to 40) -->
+      <div class="question-grid-container">
+        <div class="grid-label">Acesso Rápido às Questões (1 a 40):</div>
+        <div class="question-grid" id="quick-grid"></div>
+      </div>
+
+      <!-- Question display card -->
+      <div class="question-card">
+        <div class="block-tag" id="block-tag">Bloco 1</div>
+
+        <!-- Reading passage (Block 2 only) -->
+        <div class="reading-passage-box hidden" id="reading-passage-box">
+          <span class="reading-passage-title">📖 Going to School</span>
+          James, Dante, and William are friends. Every morning, James goes to school by bike. Dante goes to school by car with his mom, and sometimes he goes on foot when the weather is nice. William always takes the yellow school bus to go to school.
+        </div>
+
+        <div class="question-text" id="question-text">Carregando pergunta...</div>
+
+        <!-- Optional SVG image zone -->
+        <div class="visual-container hidden" id="img-container"></div>
+
+        <!-- Definition box (Block 1 only) -->
+        <div class="definition-box hidden" id="definition-box"></div>
+
+        <!-- Option Area (For Multiple Choice) -->
+        <div class="options-container" id="options-container"></div>
+
+        <!-- Text Input Area (Block 3 - Numbers) -->
+        <div class="text-input-container hidden" id="input-container">
+          <input type="text" class="text-input" id="text-answer" placeholder="Type the number in English (ex: ten, TEN, Ten)" autocomplete="off">
+          <div class="input-hint">Dica: Você pode digitar tudo minúsculo (ten), tudo maiúsculo (TEN) ou só a primeira letra maiúscula (Ten).</div>
+        </div>
+
+        <!-- Feedback message -->
+        <div class="feedback-box" id="feedback-box"></div>
+
+        <!-- Action Controls -->
+        <div class="action-controls">
+          <button class="btn-control btn-prev" id="btn-prev" onclick="prevQuestion()">Anterior</button>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn-control btn-try-again" id="btn-try-again" onclick="resetCurrentQuestion()">Try Again 🔄</button>
+            <button class="btn-control btn-check" id="btn-check" onclick="checkAnswer()">Verificar</button>
+          </div>
+          <button class="btn-control btn-next" id="btn-next" onclick="nextQuestion()">Próxima</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- REPORT CARD SCREEN -->
+    <div id="report-screen" class="report-card hidden">
+      <h2>Relatório de Desempenho 📊</h2>
+      <p style="color:#64748B;">Confira como foi o resultado da revisão!</p>
+
+      <div class="report-grade" id="report-grade">Nota: 0.0 / 10.0</div>
+      <div class="report-percentage" id="report-percentage">0% de acertos</div>
+
+      <div class="report-stats">
+        <div class="stat-box">
+          <span>Acertos</span>
+          <span class="stat-val" style="color:var(--success)" id="stat-correct">0</span>
+        </div>
+        <div class="stat-box">
+          <span>Erros</span>
+          <span class="stat-val" style="color:var(--danger)" id="stat-incorrect">0</span>
+        </div>
+        <div class="stat-box">
+          <span>Total</span>
+          <span class="stat-val" id="stat-total">40</span>
+        </div>
+      </div>
+
+      <div class="recommendations" id="recommendations-box">
+        <h4>Orientações para Revisão:</h4>
+        <ul id="recommendations-list" style="margin-left: 20px; font-size: 0.95rem;"></ul>
+      </div>
+
+      <button class="start-btn" style="margin-top: 24px;" onclick="showStudyScreen()">Refazer Quiz / Estudar</button>
+    </div>
+
+  </div>
+
+  <script>
+    // Custom colorful SVGs for Block 1 (Means of Transportation)
+    const SVG_VEHICLES = {
+      airplane: `<svg class="vehicle-svg" viewBox="0 0 200 130">
+        <path d="M25 65 L145 65 Q175 65 180 75 Q170 85 145 85 L40 85 L20 65 Z" fill="#60A5FA" stroke="#1E3A8A" stroke-width="3"/>
+        <path d="M85 65 L115 25 L130 25 L110 65 Z" fill="#93C5FD" stroke="#1E3A8A" stroke-width="3"/>
+        <path d="M85 85 L110 115 L125 115 L108 85 Z" fill="#3B82F6" stroke="#1E3A8A" stroke-width="3"/>
+        <path d="M25 65 L15 40 L32 40 L45 65 Z" fill="#3B82F6" stroke="#1E3A8A" stroke-width="3"/>
+        <circle cx="70" cy="74" r="4" fill="#EFF6FF"/><circle cx="90" cy="74" r="4" fill="#EFF6FF"/>
+        <circle cx="110" cy="74" r="4" fill="#EFF6FF"/><circle cx="130" cy="74" r="4" fill="#EFF6FF"/>
+        <path d="M150 67 Q165 67 168 74 L150 74 Z" fill="#DBEAFE"/>
+      </svg>`,
+      bus: `<svg class="vehicle-svg" viewBox="0 0 200 130">
+        <rect x="18" y="32" width="164" height="65" rx="10" fill="#8B5CF6" stroke="#4C1D95" stroke-width="3"/>
+        <rect x="28" y="42" width="28" height="24" rx="4" fill="#E0F2FE" stroke="#4C1D95" stroke-width="2"/>
+        <rect x="64" y="42" width="28" height="24" rx="4" fill="#E0F2FE" stroke="#4C1D95" stroke-width="2"/>
+        <rect x="100" y="42" width="28" height="24" rx="4" fill="#E0F2FE" stroke="#4C1D95" stroke-width="2"/>
+        <rect x="136" y="42" width="36" height="32" rx="4" fill="#BAE6FD" stroke="#4C1D95" stroke-width="2"/>
+        <circle cx="52" cy="98" r="14" fill="#1E293B"/><circle cx="52" cy="98" r="6" fill="#CBD5E1"/>
+        <circle cx="148" cy="98" r="14" fill="#1E293B"/><circle cx="148" cy="98" r="6" fill="#CBD5E1"/>
+        <rect x="174" y="76" width="8" height="10" rx="2" fill="#FDE047"/>
+      </svg>`,
+      helicopter: `<svg class="vehicle-svg" viewBox="0 0 200 130">
+        <line x1="40" y1="22" x2="165" y2="22" stroke="#334155" stroke-width="5" stroke-linecap="round"/>
+        <line x1="102" y1="22" x2="102" y2="38" stroke="#334155" stroke-width="5"/>
+        <path d="M75 38 Q135 38 145 65 Q145 90 105 90 Q70 90 65 65 Q65 38 75 38 Z" fill="#EF4444" stroke="#7F1D1D" stroke-width="3"/>
+        <path d="M108 44 Q134 46 138 66 L108 66 Z" fill="#DBEAFE" stroke="#7F1D1D" stroke-width="2"/>
+        <rect x="24" y="58" width="45" height="10" rx="4" fill="#EF4444" stroke="#7F1D1D" stroke-width="2"/>
+        <circle cx="24" cy="63" r="10" fill="none" stroke="#334155" stroke-width="3"/>
+        <line x1="75" y1="106" x2="135" y2="106" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
+        <line x1="88" y1="90" x2="88" y2="106" stroke="#334155" stroke-width="3"/>
+        <line x1="122" y1="90" x2="122" y2="106" stroke="#334155" stroke-width="3"/>
+      </svg>`,
+      car: `<svg class="vehicle-svg" viewBox="0 0 200 130">
+        <path d="M35 65 L58 38 L130 38 L155 65 L176 70 Q184 72 184 82 L184 92 L22 92 L22 76 Q22 67 35 65 Z" fill="#3B82F6" stroke="#1E3A8A" stroke-width="3"/>
+        <path d="M62 44 L92 44 L92 64 L46 64 Z" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="2"/>
+        <path d="M100 44 L126 44 L144 64 L100 64 Z" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="2"/>
+        <circle cx="56" cy="94" r="15" fill="#1E293B"/><circle cx="56" cy="94" r="7" fill="#CBD5E1"/>
+        <circle cx="146" cy="94" r="15" fill="#1E293B"/><circle cx="146" cy="94" r="7" fill="#CBD5E1"/>
+        <rect x="174" y="75" width="9" height="8" rx="2" fill="#FDE047"/>
+      </svg>`,
+      train: `<svg class="vehicle-svg" viewBox="0 0 200 130">
+        <line x1="15" y1="108" x2="185" y2="108" stroke="#475569" stroke-width="4"/>
+        <rect x="25" y="34" width="150" height="62" rx="12" fill="#EF4444" stroke="#7F1D1D" stroke-width="3"/>
+        <rect x="38" y="46" width="26" height="22" rx="4" fill="#DBEAFE" stroke="#7F1D1D" stroke-width="2"/>
+        <rect x="74" y="46" width="26" height="22" rx="4" fill="#DBEAFE" stroke="#7F1D1D" stroke-width="2"/>
+        <rect x="110" y="46" width="26" height="22" rx="4" fill="#DBEAFE" stroke="#7F1D1D" stroke-width="2"/>
+        <rect x="146" y="46" width="20" height="28" rx="4" fill="#BAE6FD" stroke="#7F1D1D" stroke-width="2"/>
+        <circle cx="52" cy="98" r="10" fill="#1E293B"/><circle cx="90" cy="98" r="10" fill="#1E293B"/>
+        <circle cx="148" cy="98" r="10" fill="#1E293B"/>
+      </svg>`,
+      motorcycle: `<svg class="vehicle-svg" viewBox="0 0 200 130">
+        <circle cx="52" cy="92" r="18" fill="#1E293B"/><circle cx="52" cy="92" r="8" fill="#CBD5E1"/>
+        <circle cx="148" cy="92" r="18" fill="#1E293B"/><circle cx="148" cy="92" r="8" fill="#CBD5E1"/>
+        <path d="M52 92 L82 60 L125 60 L148 92" fill="none" stroke="#9333EA" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M72 56 L108 56 L100 72 L68 72 Z" fill="#A855F7" stroke="#581C87" stroke-width="2"/>
+        <line x1="122" y1="42" x2="148" y2="92" stroke="#64748B" stroke-width="5" stroke-linecap="round"/>
+        <line x1="112" y1="42" x2="132" y2="42" stroke="#1E293B" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="136" cy="54" r="6" fill="#FDE047"/>
+      </svg>`
+    };
+
+    // Helper to create colorful SVG badges for Numbers (Block 3)
+    function createNumberSVG(num, bgColor) {
+      return `<svg class="number-svg" viewBox="0 0 160 110">
+        <rect x="10" y="10" width="140" height="90" rx="20" fill="${bgColor}" stroke="#1E293B" stroke-width="3"/>
+        <text x="80" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="48" font-weight="800" fill="#FFFFFF" text-anchor="middle">${num}</text>
+      </svg>`;
+    }
+
+    // Helper to shuffle array (Fisher-Yates) so correct answers are randomized
+    function shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    // Complete 40-question database
+    const questions = [
+      // ================= BLOCK 1: Means of Transportation (Questions 1-6) =================
+      {
+        id: 1, block: 1, type: "choice", svg: "car",
+        text: "Look at the picture and read the clue. Which means of transportation is it?",
+        definition: "This is a small means of transportation usually used by normal people, like a family.",
+        options: shuffleArray(["car", "bus", "train", "airplane"]),
+        answer: "car",
+        explanation: "A resposta correta é 'car' (carro), um transporte pequeno usado por famílias."
+      },
+      {
+        id: 2, block: 1, type: "choice", svg: "airplane",
+        text: "Look at the picture and read the clue. Which means of transportation is it?",
+        definition: "This big transportation has wings and flies very fast in the sky to faraway places.",
+        options: shuffleArray(["airplane", "helicopter", "train", "motorcycle"]),
+        answer: "airplane",
+        explanation: "A resposta correta é 'airplane' (avião), que tem asas e voa rápido no céu."
+      },
+      {
+        id: 3, block: 1, type: "choice", svg: "bus",
+        text: "Look at the picture and read the clue. Which means of transportation is it?",
+        definition: "This is a big vehicle on the street that carries many people to work or school.",
+        options: shuffleArray(["bus", "car", "motorcycle", "helicopter"]),
+        answer: "bus",
+        explanation: "A resposta correta é 'bus' (ônibus), um veículo grande que leva muitas pessoas."
+      },
+      {
+        id: 4, block: 1, type: "choice", svg: "helicopter",
+        text: "Look at the picture and read the clue. Which means of transportation is it?",
+        definition: "This transportation flies in the air and has a big spinning propeller on top.",
+        options: shuffleArray(["helicopter", "airplane", "bus", "car"]),
+        answer: "helicopter",
+        explanation: "A resposta correta é 'helicopter' (helicóptero), que voa com uma hélice em cima."
+      },
+      {
+        id: 5, block: 1, type: "choice", svg: "train",
+        text: "Look at the picture and read the clue. Which means of transportation is it?",
+        definition: "This long transportation moves on metal tracks and has many cars connected together.",
+        options: shuffleArray(["train", "bus", "car", "airplane"]),
+        answer: "train",
+        explanation: "A resposta correta é 'train' (trem), que anda sobre trilhos."
+      },
+      {
+        id: 6, block: 1, type: "choice", svg: "motorcycle",
+        text: "Look at the picture and read the clue. Which means of transportation is it?",
+        definition: "This transportation has two wheels and an engine. Usually one or two people ride it.",
+        options: shuffleArray(["motorcycle", "car", "train", "bus"]),
+        answer: "motorcycle",
+        explanation: "A resposta correta é 'motorcycle' (moto), que tem duas rodas e motor."
+      },
+
+      // ================= BLOCK 2: Reading Comprehension (Questions 7-10) =================
+      {
+        id: 7, block: 2, type: "choice", reading: true,
+        text: "How does James go to school every morning?",
+        options: shuffleArray(["By bike", "By car", "By school bus", "On foot"]),
+        answer: "By bike",
+        explanation: "No texto: 'James goes to school by bike.' (James vai de bicicleta)."
+      },
+      {
+        id: 8, block: 2, type: "choice", reading: true,
+        text: "Who uses two different ways to go to school?",
+        options: shuffleArray(["Dante", "James", "William", "Nobody"]),
+        answer: "Dante",
+        explanation: "No texto: Dante vai de carro ('by car') e às vezes a pé ('on foot')."
+      },
+      {
+        id: 9, block: 2, type: "choice", reading: true,
+        text: "How does William always go to school?",
+        options: shuffleArray(["By school bus", "By bike", "On foot", "By car"]),
+        answer: "By school bus",
+        explanation: "No texto: 'William always takes the yellow school bus' (ônibus escolar)."
+      },
+      {
+        id: 10, block: 2, type: "choice", reading: true,
+        text: "When does Dante go to school on foot?",
+        options: shuffleArray(["When the weather is nice", "Every morning", "When it is raining", "Never"]),
+        answer: "When the weather is nice",
+        explanation: "No texto: 'sometimes he goes on foot when the weather is nice' (quando o tempo está bom)."
+      },
+
+      // ================= BLOCK 3: Numbers 10 to 100 (Questions 11-20) =================
+      { id: 11, block: 3, type: "number", num: "10", color: "#3B82F6", text: "Write this number in English:", validAnswers: ["ten", "TEN", "Ten"], explanation: "O número 10 em inglês se escreve 'ten' (aceita: ten, TEN ou Ten)." },
+      { id: 12, block: 3, type: "number", num: "20", color: "#8B5CF6", text: "Write this number in English:", validAnswers: ["twenty", "TWENTY", "Twenty"], explanation: "O número 20 em inglês se escreve 'twenty' (aceita: twenty, TWENTY ou Twenty)." },
+      { id: 13, block: 3, type: "number", num: "30", color: "#EC4899", text: "Write this number in English:", validAnswers: ["thirty", "THIRTY", "Thirty"], explanation: "O número 30 em inglês se escreve 'thirty' (aceita: thirty, THIRTY ou Thirty)." },
+      { id: 14, block: 3, type: "number", num: "40", color: "#F59E0B", text: "Write this number in English:", validAnswers: ["forty", "FORTY", "Forty"], explanation: "Atenção! O número 40 em inglês se escreve 'forty' (sem a letra u)." },
+      { id: 15, block: 3, type: "number", num: "50", color: "#10B981", text: "Write this number in English:", validAnswers: ["fifty", "FIFTY", "Fifty"], explanation: "O número 50 em inglês se escreve 'fifty' (aceita: fifty, FIFTY ou Fifty)." },
+      { id: 16, block: 3, type: "number", num: "60", color: "#06B6D4", text: "Write this number in English:", validAnswers: ["sixty", "SIXTY", "Sixty"], explanation: "O número 60 em inglês se escreve 'sixty' (aceita: sixty, SIXTY ou Sixty)." },
+      { id: 17, block: 3, type: "number", num: "70", color: "#6366F1", text: "Write this number in English:", validAnswers: ["seventy", "SEVENTY", "Seventy"], explanation: "O número 70 em inglês se escreve 'seventy' (aceita: seventy, SEVENTY ou Seventy)." },
+      { id: 18, block: 3, type: "number", num: "80", color: "#EF4444", text: "Write this number in English:", validAnswers: ["eighty", "EIGHTY", "Eighty"], explanation: "O número 80 em inglês se escreve 'eighty' (aceita: eighty, EIGHTY ou Eighty)." },
+      { id: 19, block: 3, type: "number", num: "90", color: "#14B8A6", text: "Write this number in English:", validAnswers: ["ninety", "NINETY", "Ninety"], explanation: "O número 90 em inglês se escreve 'ninety' (aceita: ninety, NINETY ou Ninety)." },
+      { id: 20, block: 3, type: "number", num: "100", color: "#F97316", text: "Write this number in English:", validAnswers: ["one hundred", "ONE HUNDRED", "One hundred"], explanation: "O número 100 em inglês se escreve 'one hundred' (aceita: one hundred, ONE HUNDRED ou One hundred)." },
+
+      // ================= BLOCK 4A: Do / Does / Don't / Doesn't (Questions 21-30) =================
+      {
+        id: 21, block: 4, type: "choice",
+        text: "___ my father go to work by car?",
+        options: shuffleArray(["Does", "Do", "Don't", "Doesn't", "Is"]),
+        answer: "Does",
+        explanation: "'My father' equivale a 'he' (ele). Em perguntas, usamos 'Does'."
+      },
+      {
+        id: 22, block: 4, type: "choice",
+        text: "___ your friends play soccer after school?",
+        options: shuffleArray(["Do", "Does", "Don't", "Doesn't", "Are"]),
+        answer: "Do",
+        explanation: "'Your friends' está no plural (eles / they). Em perguntas, usamos 'Do'."
+      },
+      {
+        id: 23, block: 4, type: "choice",
+        text: "Sarah ___ like to ride a motorcycle. She is afraid.",
+        options: shuffleArray(["doesn't", "don't", "do", "does", "isn't"]),
+        answer: "doesn't",
+        explanation: "'Sarah' equivale a 'she' (ela). Na frase negativa, usamos 'doesn't'."
+      },
+      {
+        id: 24, block: 4, type: "choice",
+        text: "I ___ go to school by train. I go by bus.",
+        options: shuffleArray(["don't", "doesn't", "do", "does", "am not"]),
+        answer: "don't",
+        explanation: "Com o pronome 'I', usamos 'don't' na forma negativa."
+      },
+      {
+        id: 25, block: 4, type: "choice",
+        text: "___ the dog sleep in the house?",
+        options: shuffleArray(["Does", "Do", "Don't", "Doesn't", "Is"]),
+        answer: "Does",
+        explanation: "'The dog' equivale a 'it' (ele/animal). Em perguntas, usamos 'Does'."
+      },
+      {
+        id: 26, block: 4, type: "choice",
+        text: "The boys ___ have a yellow school bus.",
+        options: shuffleArray(["don't", "doesn't", "do", "does", "aren't"]),
+        answer: "don't",
+        explanation: "'The boys' está no plural (they). Na negativa, usamos 'don't'."
+      },
+      {
+        id: 27, block: 4, type: "choice",
+        text: "___ you and your sister study English together?",
+        options: shuffleArray(["Do", "Does", "Don't", "Doesn't", "Are"]),
+        answer: "Do",
+        explanation: "'You and your sister' significa 'vocês' (plural). Em perguntas, usamos 'Do'."
+      },
+      {
+        id: 28, block: 4, type: "choice",
+        text: "My brother ___ watch TV in the morning.",
+        options: shuffleArray(["doesn't", "don't", "do", "does", "isn't"]),
+        answer: "doesn't",
+        explanation: "'My brother' equivale a 'he'. Na frase negativa, usamos 'doesn't'."
+      },
+      {
+        id: 29, block: 4, type: "choice",
+        text: "___ she take the bus to go home?",
+        options: shuffleArray(["Does", "Do", "Don't", "Doesn't", "Is"]),
+        answer: "Does",
+        explanation: "Com o pronome 'she', usamos 'Does' para fazer perguntas."
+      },
+      {
+        id: 30, block: 4, type: "choice",
+        text: "We ___ live near the airport.",
+        options: shuffleArray(["don't", "doesn't", "do", "does", "aren't"]),
+        answer: "don't",
+        explanation: "Com o pronome 'we' (nós), usamos 'don't' na forma negativa."
+      },
+
+      // ================= BLOCK 4B: 3rd Person Singular Verbs +s, +es, +ies (Questions 31-40) =================
+      {
+        id: 31, block: 4, type: "choice",
+        text: "He ___ to school by bike every day. (go)",
+        options: shuffleArray(["goes", "go", "gos", "going", "is go"]),
+        answer: "goes",
+        explanation: "Verbos terminados em -o recebem +es na 3ª pessoa (he/she/it): go → goes."
+      },
+      {
+        id: 32, block: 4, type: "choice",
+        text: "My sister ___ English in the afternoon. (study)",
+        options: shuffleArray(["studies", "study", "studys", "studes", "studying"]),
+        answer: "studies",
+        explanation: "Verbos terminados em consoante + y trocam o 'y' por +ies: study → studies."
+      },
+      {
+        id: 33, block: 4, type: "choice",
+        text: "James ___ video games with his friends. (play)",
+        options: shuffleArray(["plays", "play", "plaies", "playes", "playing"]),
+        answer: "plays",
+        explanation: "Antes do 'y' há uma vogal (a), então apenas acrescentamos +s: play → plays."
+      },
+      {
+        id: 34, block: 4, type: "choice",
+        text: "She ___ cartoons on TV after lunch. (watch)",
+        options: shuffleArray(["watches", "watch", "watchs", "watchies", "watching"]),
+        answer: "watches",
+        explanation: "Verbos terminados em -ch recebem +es na 3ª pessoa: watch → watches."
+      },
+      {
+        id: 35, block: 4, type: "choice",
+        text: "The airplane ___ very high in the sky. (fly)",
+        options: shuffleArray(["flies", "fly", "flys", "flyes", "flying"]),
+        answer: "flies",
+        explanation: "Verbos terminados em consoante + y trocam o 'y' por +ies: fly → flies."
+      },
+      {
+        id: 36, block: 4, type: "choice",
+        text: "My dad ___ his car on Saturday. (wash)",
+        options: shuffleArray(["washes", "wash", "washs", "washies", "washing"]),
+        answer: "washes",
+        explanation: "Verbos terminados em -sh recebem +es na 3ª pessoa: wash → washes."
+      },
+      {
+        id: 37, block: 4, type: "choice",
+        text: "Dante ___ ice cream and pizza. (like)",
+        options: shuffleArray(["likes", "like", "likies", "likees", "liking"]),
+        answer: "likes",
+        explanation: "Regra geral para a 3ª pessoa (he/she/it): acrescentamos +s: like → likes."
+      },
+      {
+        id: 38, block: 4, type: "choice",
+        text: "The mechanic ___ the motorcycle. (fix)",
+        options: shuffleArray(["fixes", "fix", "fixs", "fixies", "fixing"]),
+        answer: "fixes",
+        explanation: "Verbos terminados em -x recebem +es na 3ª pessoa: fix → fixes."
+      },
+      {
+        id: 39, block: 4, type: "choice",
+        text: "The baby ___ when he is hungry. (cry)",
+        options: shuffleArray(["cries", "cry", "crys", "cryes", "crying"]),
+        answer: "cries",
+        explanation: "Verbos terminados em consoante + y trocam o 'y' por +ies: cry → cries."
+      },
+      {
+        id: 40, block: 4, type: "choice",
+        text: "Mr. Brown ___ math at our school. (teach)",
+        options: shuffleArray(["teaches", "teach", "teachs", "teachies", "teaching"]),
+        answer: "teaches",
+        explanation: "Verbos terminados em -ch recebem +es na 3ª pessoa: teach → teaches."
+      }
+    ];
+
+    let currentIdx = 0;
+    let userAnswers = {}; // Stores { questionId: { value, isCorrect, checked } }
+
+    window.onload = function() {
+      buildQuickGrid();
+      buildSidebarNav();
+    };
+
+    function startQuiz() {
+      document.getElementById('study-screen').classList.add('hidden');
+      document.getElementById('report-screen').classList.add('hidden');
+      document.getElementById('quiz-screen').classList.remove('hidden');
+      renderQuestion(currentIdx);
+    }
+
+    function showStudyScreen() {
+      document.getElementById('quiz-screen').classList.add('hidden');
+      document.getElementById('report-screen').classList.add('hidden');
+      document.getElementById('study-screen').classList.remove('hidden');
+    }
+
+    function buildQuickGrid() {
+      const grid = document.getElementById('quick-grid');
+      grid.innerHTML = '';
+      questions.forEach((q, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'q-btn';
+        btn.id = `grid-btn-${index}`;
+        btn.innerText = index + 1;
+        btn.onclick = () => jumpToQuestion(index);
+        grid.appendChild(btn);
+      });
+    }
+
+    function updateQuickGrid() {
+      questions.forEach((q, index) => {
+        const btn = document.getElementById(`grid-btn-${index}`);
+        const state = userAnswers[q.id];
+
+        btn.className = 'q-btn';
+        if (index === currentIdx) {
+          btn.classList.add('active');
+        }
+
+        if (state && state.checked) {
+          if (state.isCorrect) {
+            btn.classList.add('correct');
+          } else {
+            btn.classList.add('incorrect');
+          }
+        }
+      });
+    }
+
+    function buildSidebarNav() {
+      const sidebarContent = document.getElementById('sidebar-content');
+      sidebarContent.innerHTML = '';
+
+      const blockNames = {
+        1: "BLOCO 1 - Transportes",
+        2: "BLOCO 2 - Leitura",
+        3: "BLOCO 3 - Números",
+        4: "BLOCO 4 - Gramática"
+      };
+
+      let currentBlock = 0;
+      questions.forEach((q, index) => {
+        if (q.block !== currentBlock) {
+          currentBlock = q.block;
+          const blockTitle = document.createElement('div');
+          blockTitle.className = 'block-section-title';
+          blockTitle.innerText = blockNames[currentBlock];
+          sidebarContent.appendChild(blockTitle);
+        }
+
+        const item = document.createElement('div');
+        item.className = 'sidebar-item';
+        const label = q.num ? `Number ${q.num}` : q.text.substring(0, 22) + '...';
+        item.innerHTML = `<span>Q${index + 1}. ${label}</span>`;
+        item.onclick = () => {
+          jumpToQuestion(index);
+          toggleSidebar();
+        };
+        sidebarContent.appendChild(item);
+      });
+    }
+
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      const isOpen = sidebar.classList.contains('open');
+
+      if (isOpen) {
+        sidebar.classList.remove('open');
+        overlay.style.display = 'none';
+      } else {
+        sidebar.classList.add('open');
+        overlay.style.display = 'block';
+      }
+    }
+
+    function jumpToQuestion(index) {
+      currentIdx = index;
+      renderQuestion(currentIdx);
+    }
+
+    function renderQuestion(index) {
+      const q = questions[index];
+      updateQuickGrid();
+
+      const blockLabels = {
+        1: "Bloco 1: Means of Transportation",
+        2: "Bloco 2: Reading Comprehension",
+        3: "Bloco 3: Numbers (10 to 100)",
+        4: "Bloco 4: Grammar (Do/Does & Verbs)"
+      };
+
+      document.getElementById('block-tag').innerText = blockLabels[q.block];
+      document.getElementById('question-text').innerText = `${index + 1}. ${q.text}`;
+
+      // Reset visibility
+      document.getElementById('reading-passage-box').classList.add('hidden');
+      document.getElementById('img-container').classList.add('hidden');
+      document.getElementById('definition-box').classList.add('hidden');
+      document.getElementById('options-container').classList.add('hidden');
+      document.getElementById('input-container').classList.add('hidden');
+      document.getElementById('feedback-box').className = 'feedback-box';
+      document.getElementById('feedback-box').style.display = 'none';
+      document.getElementById('btn-try-again').style.display = 'none';
+
+      // Reading passage (Block 2)
+      if (q.reading) {
+        document.getElementById('reading-passage-box').classList.remove('hidden');
+      }
+
+      // Block 1 image (transportes.jpg)
+      if (q.block === 1) {
+        const imgContainer = document.getElementById('img-container');
+        imgContainer.innerHTML = `<img src="transportes.jpg" alt="Means of Transportation" style="max-width:100%; border-radius:12px; margin-bottom:12px;" onerror="this.style.display='none'">`;
+        imgContainer.classList.remove('hidden');
+      }
+
+      // Block 2 image (escolatabela.jpg)
+      if (q.block === 2) {
+        const imgContainer = document.getElementById('img-container');
+        imgContainer.innerHTML = `<img src="escolatabela.jpg" alt="School Transportation Table" style="max-width:100%; border-radius:12px; margin-bottom:12px;" onerror="this.style.display='none'">`;
+        imgContainer.classList.remove('hidden');
+      }
+
+      // Number SVG (Block 3)
+      if (q.type === 'number') {
+        const imgContainer = document.getElementById('img-container');
+        imgContainer.innerHTML = createNumberSVG(q.num, q.color);
+        imgContainer.classList.remove('hidden');
+      }
+
+      // Definition box (Block 1)
+      if (q.definition) {
+        const defBox = document.getElementById('definition-box');
+        defBox.innerText = q.definition;
+        defBox.classList.remove('hidden');
+      }
+
+      const state = userAnswers[q.id] || {};
+
+      // Choice type (Blocks 1, 2, 4)
+      if (q.type === 'choice') {
+        const optionsContainer = document.getElementById('options-container');
+        optionsContainer.innerHTML = '';
+        optionsContainer.classList.remove('hidden');
+
+        q.options.forEach(opt => {
+          const btn = document.createElement('button');
+          btn.className = 'btn-option';
+          btn.innerText = opt;
+
+          if (state.value === opt) btn.classList.add('selected');
+          if (state.checked) {
+            btn.disabled = true;
+            if (opt === q.answer) btn.classList.add('correct-opt');
+            else if (state.value === opt) btn.classList.add('wrong-opt');
+          } else {
+            btn.onclick = () => selectOption(q.id, opt);
+          }
+
+          optionsContainer.appendChild(btn);
+        });
+      }
+      // Number text input type (Block 3)
+      else if (q.type === 'number') {
+        const inputContainer = document.getElementById('input-container');
+        const textInput = document.getElementById('text-answer');
+        inputContainer.classList.remove('hidden');
+
+        textInput.value = state.value || '';
+        textInput.disabled = !!state.checked;
+      }
+
+      // Show feedback if already checked
+      if (state.checked) {
+        showFeedback(state.isCorrect, q.explanation);
+        if (!state.isCorrect && q.type === 'number') {
+          document.getElementById('btn-try-again').style.display = 'inline-block';
+        }
+      }
+    }
+
+    function selectOption(qId, value) {
+      userAnswers[qId] = { value: value, checked: false };
+      renderQuestion(currentIdx);
+    }
+
+    function checkAnswer() {
+      const q = questions[currentIdx];
+      let val = userAnswers[q.id]?.value;
+
+      if (q.type === 'number') {
+        val = document.getElementById('text-answer').value.trim();
+        userAnswers[q.id] = { value: val };
+      }
+
+      if (!val) {
+        const box = document.getElementById('feedback-box');
+        box.style.display = 'block';
+        box.className = 'feedback-box warning';
+        box.innerHTML = '⚠️ Por favor, responda à questão antes de verificar!';
+        return;
+      }
+
+      let isCorrect = false;
+      if (q.type === 'choice') {
+        isCorrect = (val === q.answer);
+      } else if (q.type === 'number') {
+        // Accepts exact match with: lowercase, ALL CAPS, or Title Case
+        isCorrect = q.validAnswers.includes(val);
+      }
+
+      userAnswers[q.id].isCorrect = isCorrect;
+      userAnswers[q.id].checked = true;
+
+      renderQuestion(currentIdx);
+    }
+
+    function resetCurrentQuestion() {
+      const q = questions[currentIdx];
+      delete userAnswers[q.id];
+      renderQuestion(currentIdx);
+    }
+
+    function showFeedback(isCorrect, explanation) {
+      const box = document.getElementById('feedback-box');
+      box.style.display = 'block';
+
+      if (isCorrect) {
+        box.className = 'feedback-box correct';
+        box.innerHTML = `<b>✨ Excelente! Você acertou!</b><br>${explanation}`;
+      } else {
+        box.className = 'feedback-box incorrect';
+        box.innerHTML = `<b>❌ Resposta Incorreta!</b><br>${explanation}`;
+      }
+    }
+
+    function prevQuestion() {
+      if (currentIdx > 0) {
+        currentIdx--;
+        renderQuestion(currentIdx);
+      }
+    }
+
+    function nextQuestion() {
+      if (currentIdx < questions.length - 1) {
+        currentIdx++;
+        renderQuestion(currentIdx);
+      } else {
+        generateReport();
+      }
+    }
+
+    /* Final performance report */
+    function generateReport() {
+      document.getElementById('quiz-screen').classList.add('hidden');
+      document.getElementById('report-screen').classList.remove('hidden');
+
+      let correctCount = 0;
+      let incorrectCount = 0;
+      let blockErrors = { 1: 0, 2: 0, 3: 0, 4: 0 };
+
+      questions.forEach(q => {
+        const state = userAnswers[q.id];
+        if (state && state.checked && state.isCorrect) {
+          correctCount++;
+        } else {
+          incorrectCount++;
+          blockErrors[q.block]++;
+        }
+      });
+
+      const total = questions.length;
+      const percentage = Math.round((correctCount / total) * 100);
+      const grade = ((correctCount / total) * 10).toFixed(1);
+
+      document.getElementById('report-grade').innerText = `Nota: ${grade} / 10.0`;
+      document.getElementById('report-percentage').innerText = `${percentage}% de acertos (${100 - percentage}% de erros)`;
+      document.getElementById('stat-correct').innerText = correctCount;
+      document.getElementById('stat-incorrect').innerText = incorrectCount;
+      document.getElementById('stat-total').innerText = total;
+
+      // Recommendations generator based on significant errors per block
+      const recList = document.getElementById('recommendations-list');
+      recList.innerHTML = '';
+
+      if (percentage === 100) {
+        recList.innerHTML = "<li>Parabéns! Você dominou todo o conteúdo perfeitamente! Nota máxima! 🌟</li>";
+      } else {
+        let hasSpecificRec = false;
+        if (blockErrors[1] >= 2) {
+          recList.innerHTML += "<li><b>Bloco 1 (Meios de Transporte):</b> Revise o vocabulário de transportes (<i>airplane, bus, helicopter, car, train, motorcycle</i>).</li>";
+          hasSpecificRec = true;
+        }
+        if (blockErrors[2] >= 2) {
+          recList.innerHTML += "<li><b>Bloco 2 (Interpretação de Texto):</b> Pratique a leitura com atenção aos detalhes de como cada amigo vai à escola (<i>by bike, by car, on foot, by school bus</i>).</li>";
+          hasSpecificRec = true;
+        }
+        if (blockErrors[3] >= 3) {
+          recList.innerHTML += "<li><b>Bloco 3 (Números 10 a 100):</b> Treine a escrita correta das dezenas em inglês, especialmente <i>forty, thirty, fifty, eighty</i> e <i>one hundred</i>.</li>";
+          hasSpecificRec = true;
+        }
+        if (blockErrors[4] >= 5) {
+          recList.innerHTML += "<li><b>Bloco 4 (Gramática - Do/Does e Verbos):</b> Revise quando usar <i>Do/Don't</i> vs <i>Does/Doesn't</i> e as regras de verbos na 3ª pessoa do singular (+s, +es, +ies).</li>";
+          hasSpecificRec = true;
+        }
+        if (!hasSpecificRec) {
+          recList.innerHTML = "<li>Muito bom! Apenas poucos erros pontuais. Vale dar uma olhadinha rápida nas questões que errou para gabaritar na próxima! 👏</li>";
+        }
+      }
+    }
+  </script>
+</body>
+</html>
